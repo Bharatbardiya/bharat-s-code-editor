@@ -88,7 +88,7 @@ const EditorPage = () => {
             ],
         };
         const { data } = await axios.post(
-            "http://localhost:5000/runCode",
+            process.env.REACT_APP_BACKEND_URL,
             codeInfo,
             {
                 headers: {
