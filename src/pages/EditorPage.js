@@ -123,101 +123,112 @@ const EditorPage = () => {
     }
 
     return (
-        <div className="mainWrap">
-            <div className="aside">
-                <div className="asideInner">
-                    <div className="logo">
-                        <img
-                            className="logoImage"
-                            src="/code-logo.png"
-                            alt="logo"
+        <div className="mainWrap row me-2">
+            <div className="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div className="aside">
+                    <div className="asideInner">
+                        <div className="logo">
+                            <img
+                                className="logoImage"
+                                src="/code-logo.png"
+                                alt="logo"
+                            />
+                        </div>
+                        <div className="row">
+                            <button
+                                className="btn btn-info ms-2 mb-3"
+                                style={{ display: "inline", width: "120px" }}
+                                onClick={RunCode}
+                            >
+                                Run Code
+                            </button>
+                        </div>
+                        <h3>Connected</h3>
+                        <div className="clientsList">
+                            {clients.map((client) => (
+                                <Client
+                                    key={client.socketId}
+                                    username={client.username}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <button className="btn copyBtn" onClick={copyRoomId}>
+                        Copy ROOM ID
+                    </button>
+                    <button className="btn leaveBtn" onClick={leaveRoom}>
+                        Leave
+                    </button>
+                </div>
+            </div>
+            <div className="col-6 col-md-8 col-lg-9 col-xl-10">
+                <div className="row">
+                    <div className="col-12 col-lg-8 editor">
+                        {/*Alert for language support*/}
+
+                        <div
+                            class="alert alert-warning alert-dismissible fade show"
+                            role="alert"
+                        >
+                            <strong>Note: </strong>Currently Our Website only
+                            support Python Code to run.
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <p
+                            className="fw-bold ms-2 mt-2"
+                            style={{ color: "white" }}
+                        >
+                            Lanuage : Python
+                        </p>
+                        <Editor
+                            socketRef={socketRef}
+                            roomId={roomId}
+                            onCodeChange={(code) => {
+                                codeRef.current = code;
+                            }}
                         />
                     </div>
-                    <div className="row">
-                        <button
-                            className="btn btn-info ms-2 mb-3"
-                            style={{ display: "inline", width: "120px" }}
-                            onClick={RunCode}
-                        >
-                            Run Code
-                        </button>
-                    </div>
-                    <h3>Connected</h3>
-                    <div className="clientsList">
-                        {clients.map((client) => (
-                            <Client
-                                key={client.socketId}
-                                username={client.username}
-                            />
-                        ))}
-                    </div>
-                </div>
-                <button className="btn copyBtn" onClick={copyRoomId}>
-                    Copy ROOM ID
-                </button>
-                <button className="btn leaveBtn" onClick={leaveRoom}>
-                    Leave
-                </button>
-            </div>
-            <div className="editorWrap row">
-                <div className="editor-campo col-12 col-lg-8 col-xl-10">
-                    {/*Alert for language support*/}
-
-                    <div
-                        class="alert alert-warning alert-dismissible fade show"
-                        role="alert"
-                    >
-                        <strong>Note: </strong>Currently Our Website only
-                        support Python Code to run.
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <p className="fw-bold ms-2 mt-2" style={{color:"white"}}>Lanuage : Python</p>
-                    <Editor
-                        socketRef={socketRef}
-                        roomId={roomId}
-                        onCodeChange={(code) => {
-                            codeRef.current = code;
-                        }}
-                    />
-                </div>
-                <div className="col-12 col-lg-4 col-xl-2 row">
-                    <div className="col-6 col-lg-12">
-                        <p style={{ color: "white" }}>Input</p>
-                        <textarea
-                            name=""
-                            id=""
-                            style={{
-                                width: "100%",
-                                height: "80%",
-                                fontFamily: "Consolas",
-                            }}
-                            value={stdin}
-                            onChange={(e) => {
-                                setStdin(e.target.value);
-                            }}
-                        ></textarea>
-                    </div>
-                    <div className="col-6 col-lg-12 mt-lg-2">
-                        <p style={{ color: "white" }}>Output</p>
-                        <textarea
-                            name=""
-                            id=""
-                            readOnly
-                            style={{
-                                width: "100%",
-                                height: "80%",
-                                fontFamily: "Consolas",
-                            }}
-                            value={stdout}
-                            onChange={(e) => {
-                                setStdout(e.target.value);
-                            }}
-                        ></textarea>
+                    <div className="col-12 col-lg-4 stdio">
+                        <div className="row stdin-stdout">
+                        <div className="stdin-box">
+                            <p style={{ color: "white" }}>Input</p>
+                            <textarea
+                                name=""
+                                id=""
+                                style={{
+                                    width: "100%",
+                                    height: "80%",
+                                    fontFamily: "Consolas",
+                                }}
+                                value={stdin}
+                                onChange={(e) => {
+                                    setStdin(e.target.value);
+                                }}
+                            ></textarea>
+                        </div>
+                        <div className="stdout-box">
+                            <p style={{ color: "white" }}>Output</p>
+                            <textarea
+                                name=""
+                                id=""
+                                readOnly
+                                style={{
+                                    width: "100%",
+                                    height: "80%",
+                                    fontFamily: "Consolas",
+                                }}
+                                value={stdout}
+                                onChange={(e) => {
+                                    setStdout(e.target.value);
+                                }}
+                            ></textarea>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>

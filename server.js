@@ -35,7 +35,7 @@ function getAllConnectedClients(roomId) {
 }
 
 io.on("connection", (socket) => {
-    console.log("socket connected", socket.id);
+    // console.log("socket connected", socket.id);
 
     socket.on(ACTIONS.JOIN, ({ roomId, username }) => {
         userSocketMap[socket.id] = username;
@@ -83,12 +83,24 @@ app.get("/runCode",  (req, res) => {
     res.status(200).json({name:"bharat"});
 });
 
+
+// for deployment 
+
+app.use(express.static(path.join(__dirname, "./build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./build/index.html"));
+});
+
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
+
+
+
+
 const RunCode = async (codeInfo) => {
 
-    
     const options = {
         headers: {
             Authorization: `Token ${process.env.GLOT_TOKEN}`,

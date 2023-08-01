@@ -107,16 +107,17 @@ footer a:hover {
     border-color: #191d1b;
 }
 
-.mainWrap {
+/* .mainWrap {
     display: grid;
     grid-template-columns: 230px 1fr;
-}
+} */
 
 .aside {
     background: #14182b;
     padding: 16px;
     color: #fff;
     display: flex;
+    height: 100vh;
     flex-direction: column;
 }
 .asideInner {
@@ -166,9 +167,30 @@ footer a:hover {
 .editor-campo{
     max-width: 100vh;
 }
-
-@media only screen and (max-width: 600px) {
-    body {
-      background-color: lightblue;
+.stdin-stdout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+@media only screen and (max-width: 991px) {
+    .stdin-box, .stdout-box{
+        width: 50%;
+        height: 200px;
     }
-  }
+    .stdin-stdout{
+        flex-direction: row;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .stdin-box, .stdout-box{
+        width: 100%;
+        height: 40vh;
+        margin-right:10px;
+    }
+    
+    .stdin-stdout{
+        flex-direction: column;
+    }
+}
