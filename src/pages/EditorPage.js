@@ -82,7 +82,7 @@ const EditorPage = () => {
             stdin: stdin,
             files: [
                 {
-                    name: "main.py",
+                    name: "main.cpp",
                     content: codeRef.current,
                 },
             ],
@@ -171,7 +171,7 @@ const EditorPage = () => {
                             role="alert"
                         >
                             <strong>Note: </strong>Currently Our Website only
-                            support Python Code to run.
+                            support C++ Code to run.
                             <button
                                 type="button"
                                 class="btn-close"
@@ -183,7 +183,7 @@ const EditorPage = () => {
                             className="fw-bold ms-2 mt-2"
                             style={{ color: "white" }}
                         >
-                            Lanuage : Python
+                            Lanuage : C++
                         </p>
                         <Editor
                             socketRef={socketRef}

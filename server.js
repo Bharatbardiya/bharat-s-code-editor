@@ -109,7 +109,7 @@ const RunCode = async (codeInfo) => {
     };
     try{
         const { data } = await axios.post(
-            "https://glot.io/api/run/python/latest",
+            "https://glot.io/api/run/cpp/latest",
             codeInfo,
             options
         );
